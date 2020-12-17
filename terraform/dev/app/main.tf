@@ -32,41 +32,13 @@ output "url" {
   value = module.app.url
 }
 
-output "codedeploy_app_name" {
-  value = module.app.codedeploy_app_name
-}
 
-output "codedeploy_deployment_group_name" {
-  value = module.app.codedeploy_deployment_group_name
-}
-
-output "codedeploy_appspec_json_file" {
-  value = module.app.codedeploy_appspec_json_file
+module "app" {
+  source                           = "../../modules/app/"
+  env                              = "dev"
+  image_tag                        = var.image_tag
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-# -----------------------------------------------------------------------------
-# RDS
-# -----------------------------------------------------------------------------
-resource "aws_db_instance" "mysql" {
-  allocated_storage    = 20
-  storage_type         = "gp2"
-  engine               = "mysql"
-  engine_version       = "5.7"
-  instance_class       = "db.t2.micro"
-  name                 = "mydb"
-  username             = "foo"
-  parameter_group_name = "default.mysql5.7"
-}
